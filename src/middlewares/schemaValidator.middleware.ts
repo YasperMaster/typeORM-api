@@ -3,7 +3,10 @@ import { AnyZodObject, ZodError } from "zod";
 
 export const schemaValidation = (schema: AnyZodObject) => (req: Request, res: Response, next: NextFunction) => {
     try {
-        schema.parse(req.body)
+        schema.parse({ 
+            body: req.body, 
+            params: req.params, 
+            query: req.query})
         next();
     } catch (error) {
         if (error instanceof ZodError) {

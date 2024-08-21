@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { createEvent } from "../controllers/event.controllers";
+import { createEvent, updateEvent } from "../controllers/event.controllers";
 import { schemaValidation } from "../middlewares/schemaValidator.middleware";
-import { eventSchema } from "../schemas/event.schema";
+import { createEventSchema, updateEventSchema } from "../schemas/event.schema";
 
 const router = Router()
 
-router.post("/events", schemaValidation(eventSchema), createEvent)
+router.post("/events", schemaValidation(createEventSchema), createEvent)
+router.put("/events/:id", schemaValidation(updateEventSchema), updateEvent)
 
 export default router
