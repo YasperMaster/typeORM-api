@@ -1,5 +1,5 @@
 import express from "express";
-import eventRoutes from "./routes/event.routes"
+import eventRoutes from "./event/event.routes"
 
 const app = express()
 
