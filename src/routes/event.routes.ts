@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createEvent } from "../controllers/event.controllers";
+import { schemaValidation } from "../middlewares/schemaValidator.middleware";
 
 const router = Router()
 
