@@ -1,32 +1,22 @@
-import { query } from "express"
 import { z } from "zod"
 
 export const createEventSchema = z.object({
     body: z.object ({
-        name: z.string(),
-        generalTickets: z.number(),
-        description: z.string(),
-        dateTime: z.string()
+        name: z.string().min(1, "name is required"),
+        generalTickets: z.number().min(1, "Quantity of general tickets is required"),
+        description: z.string().min(5, "Description is too short"),
+        dateTime: z.string().min(1, "date is required")
     })
 })
 
 export const updateEventSchema = z.object({
     body: z.object ({
-        name: z.string().optional(),
-        generalTickets: z.number().optional(),
-        description: z.string().optional(),
-        dateTime: z.string().optional()
+        name: z.string().min(1, "name is required").optional(),
+        generalTickets: z.number().min(1, "Quantity of general tickets is required").optional(),
+        description: z.string().min(5, "Description is too short").optional(),
+        dateTime: z.string().min(1, "date is required").optional()
     }),
     params: z.object({
-        id: z.string().min(3)
+        id: z.string().min(1)
     }),
-    query: z.object({
-        title: z.string()
-    })
 })
-
-export type createEventType = z.infer<typeof createEventSchema>["body"]
-
-export type updateEventBodyType = z.infer<typeof updateEventSchema>["body"]
-export type updateEventParamsType = z.infer<typeof updateEventSchema>["params"]
-export type updateEventQueryType = z.infer<typeof updateEventSchema>["query"]
